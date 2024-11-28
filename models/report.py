@@ -2,10 +2,10 @@
 """a report model"""
 from sqlmodel import Field, SQLModel, Relationship
 from incident import Incident
-from .base import BaseModel
+from .base import Base
 
 
-class Report(BaseModel, SQLModel, table=True):
+class Report(Base, SQLModel, table=True):
     """
         Report class that implements the report model
     """

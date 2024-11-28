@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 """a gadget model"""
-from pydantic import BaseModel
 from sqlmodel import Field, SQLModel
 from .user import User
-from .base import BaseModel
+from .base import Base
 
 
-class Gadget(BaseModel, SQLModel, table=True):
+class Gadget(Base, SQLModel, table=True):
     """
         Gadget class that implements the gadget model
     """

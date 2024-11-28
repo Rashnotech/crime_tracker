@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 from . import storage
 
 
-class BaseModel(BaseModel):
+class Base(BaseModel):
     """
         BaseModel class that implements
     """

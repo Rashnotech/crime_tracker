@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
 """a crime tracker model"""
-from uuid import uuid4
-from datetime import datetime
 from location import Location
 from sqlmodel import Field, SQLModel, Relationship
-from .base import BaseModel
+from .base import Base
 from category import Category
 from .report import Report
 
-class Incident(BaseModel, SQLModel, table=True):
+class Incident(Base, SQLModel, table=True):
     """
     Incident Model
     """
@@ -17,9 +15,9 @@ class Incident(BaseModel, SQLModel, table=True):
     pictures: list[str] = Field(default=[])
     videos: list[str] = Field(default=[])
     location: Location = Field(max_length=50, required=True)
-    category: Category = Field(max_length=50, required=True)
+    category: Category = Relationship(back_populates="categories.id")
     report: Report | None = Relationship(back_populates="incident")
 
-    def __init__(self, kwargs):
+    def __init__(self, **kwargs):
         """initialize the incident model"""
-        super().__init__(kwargs)
+        super().__init__(**kwargs)

@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 """a base model"""
-from typing import Tuple
 from sqlmodel import Field, SQLModel
-from pydantic import BaseModel, Field, EmailStr
-from .base import BaseModel
+from pydantic import Field, EmailStr
+from .base import Base
 from hashlib import md5
 
-class User(BaseModel, SQLModel, table=True):
+class User(Base, SQLModel, table=True):
     """
         BaseModel class that implements
     """
