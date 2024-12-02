@@ -1,18 +1,20 @@
 #!/usr/bin/env python3
 """a report model"""
-from sqlmodel import Field, SQLModel, Relationship
-from incident import Incident
-from .base import Base
+from typing import Optional
+from sqlmodel import Field
+from datetime import datetime
+from entity.crime_entity import CrimeCategory
+from base import BaseModel
 
 
-class Report(Base, SQLModel, table=True):
-    """
-        Report class that implements the report model
-    """
-    title: str = Field(max_length=50, required=True)
-    incident_id: str = Field(foreign_key="incident.id", required=True)
-    incident: Incident | None = Relationship(back_populates="reports")
-    
-    def __init__(self, **kwargs):
-        """initialization"""
-        super().__init__(**kwargs)
+class CrimeReportBase(BaseModel):
+    reporter_id: int = Field(foreign_key="user.id")
+    category: CrimeCategory
+    description: str
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    address: Optional[str] = None
+    incident_date: datetime
+    report_date: datetime = Field(default_factory=datetime.utcnow)
+    is_verified: bool = False
+    is_resolved: bool = False
